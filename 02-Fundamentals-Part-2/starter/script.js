@@ -25,7 +25,7 @@
 // const age1 = calcAge1(1999);
 // console.log(age1);
 
-// // function expression. Expression create values.
+// // // function expression. Expression create values.
 // const calcAge2 = function (birthYear) {
 //   return 2037 - birthYear;
 // };
@@ -77,3 +77,43 @@ function checkWinner(dolAverage, kolAverage) {
 }
 
 checkWinner(dolphinsAvgScore, koalasAvgScore);
+
+// // function expression. Expression create values.
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+};
+// ========================== Arrays =============================
+const array = [1992, 1967, 2002, 2010, 2018];
+
+let ages = [];
+array.forEach((ar) => {
+  ages.push(calcAge2(ar));
+});
+console.log(ages);
+
+// Add elements to end
+array.push("jay");
+
+//  Adds element to begining of array
+array.unshift("jay");
+
+// Remove elements
+array.pop(); // removes last. Does return removed element
+array.shift(); // removes first. Does return removed element
+
+array.indexOf(1992);
+array.includes(1992); // includes test with stick equality. Does not due type cohorsion
+
+const tipCalc = (bill) => {
+  if (bill >= 50 && bill <= 300) {
+    return bill * 0.15;
+  } else {
+    return bill * 0.2;
+  }
+};
+
+const bills = [100, 125, 555, 44];
+
+let tips = [];
+bills.forEach((bill) => tips.push(tipCalc(bill)));
+console.log(tips);
