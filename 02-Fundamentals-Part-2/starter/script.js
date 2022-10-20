@@ -72,7 +72,7 @@ function checkWinner(dolAverage, kolAverage) {
   } else if (dolAverage * 2 < kolAverage) {
     console.log(`Koalas win (${kolAverage} to ${dolAverage})`);
   } else {
-    console.log("No winner");
+    console.log('No winner');
   }
 }
 
@@ -86,16 +86,16 @@ const calcAge2 = function (birthYear) {
 const array = [1992, 1967, 2002, 2010, 2018];
 
 let ages = [];
-array.forEach((ar) => {
+array.forEach(ar => {
   ages.push(calcAge2(ar));
 });
 console.log(ages);
 
 // Add elements to end
-array.push("jay");
+array.push('jay');
 
 //  Adds element to begining of array
-array.unshift("jay");
+array.unshift('jay');
 
 // Remove elements
 array.pop(); // removes last. Does return removed element
@@ -121,8 +121,8 @@ array.includes(1992); // includes test with stick equality. Does not due type co
 //===================== Objects ===========================
 
 const mark = {
-  firstName: "Mark",
-  lastName: "Smith",
+  firstName: 'Mark',
+  lastName: 'Smith',
   height: 1.69,
   weight: 78,
   calcBMI: function () {
@@ -132,8 +132,8 @@ const mark = {
 };
 
 const john = {
-  firstName: "John",
-  lastName: "Johnson",
+  firstName: 'John',
+  lastName: 'Johnson',
   height: 1.95,
   weight: 92,
   calcBMI: function () {
@@ -168,22 +168,22 @@ console.log(age);
 
 const type = [
   100,
-  "no",
+  'no',
   true,
-  "yes",
+  'yes',
   125,
   555,
   44,
-  ["jordan", "kathryn", "barch"],
+  ['jordan', 'kathryn', 'barch'],
 ];
 
-console.log("Continue and break");
+console.log('Continue and break');
 for (let i = 0; i < type.length; i++) {
-  if (typeof type[i] !== "string") continue;
+  if (typeof type[i] !== 'string') continue;
   console.log(type[i], typeof type[i]);
 }
 for (let i = 0; i < type.length; i++) {
-  if (typeof type[i] === "string") break;
+  if (typeof type[i] === 'string') break;
   console.log(type[i], typeof type[i]);
 }
 
@@ -198,7 +198,7 @@ for (let i = 1; i <= 4; i++) {
     // console.log(`Lifting weight reps ${r} 🏋🏼‍♀️`);
   }
 }
-console.log("========== While Loop========");
+console.log('========== While Loop========');
 
 for (let r = 1; r <= 6; r++) {
   // console.log(`Lifting weight reps ${r} 🏋🏼‍♀️`);
@@ -215,7 +215,7 @@ let dice = Math.trunc(Math.random() * 6) + 1;
 while (dice !== 6) {
   console.log(`You rolled a ${dice}`);
   dice = Math.trunc(Math.random() * 6) + 1;
-  if (dice === 6) console.log("You rolled a 6!! Looped ended");
+  if (dice === 6) console.log('You rolled a 6!! Looped ended');
 }
 
 const bills = [22, 295, 176, 440, 34, 105, 10, 1100, 86, 52];
@@ -223,7 +223,7 @@ const bills = [22, 295, 176, 440, 34, 105, 10, 1100, 86, 52];
 let tip = [];
 let totals = [];
 
-const tipCalc = (bill) => {
+const tipCalc = bill => {
   if (bill >= 50 && bill <= 300) {
     return bill * 0.15;
   } else {
@@ -237,7 +237,7 @@ for (let i = 0; i < bills.length; i++) {
   totals.push(tips + bills[i]);
 }
 
-const calcAverage = (arr) => {
+const calcAverage = arr => {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
@@ -247,3 +247,8 @@ const calcAverage = (arr) => {
 console.log({ tip, totals });
 console.log(calcAverage(totals));
 console.log(calcAverage(tip));
+
+const x = '23';
+
+const call = year => 2039 - year;
+console.log();
