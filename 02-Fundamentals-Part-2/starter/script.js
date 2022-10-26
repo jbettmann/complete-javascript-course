@@ -1,4 +1,4 @@
-// "use strict"; // help avoid bugs. Shows visible errors.
+'use strict'; // help avoid bugs. Shows visible errors.
 
 // let hasDriversLicense = false;
 // const passTest = true;
@@ -252,3 +252,84 @@ const x = '23';
 
 const call = year => 2039 - year;
 console.log();
+
+let a = [5, 6, 7];
+let b = [3, 6, 10];
+
+function compareTriplets(a, b) {
+  let al = 0;
+  let bob = 0;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] > b[i]) {
+      al++;
+      console.log(al);
+    } else if (a[i] < b[i]) {
+      bob++;
+      console.log(bob);
+    }
+  }
+  return [al, bob];
+}
+
+function aVeryBigSum(ar) {
+  // Write your code here
+  let sum = 0;
+  for (let i = 0; i < ar.length; i++) {
+    ar[i] += sum;
+  }
+  return sum;
+}
+console.log(aVeryBigSum(a));
+
+// getting the difference between diaganal sums
+function dD(arr) {
+  let d1 = 0;
+  let d2 = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (i === j) {
+        d1 += arr[i][j];
+      }
+      if (i + j === arr.length - 1) {
+        d2 += arr[i][j];
+      }
+    }
+  }
+}
+
+const arraysss = [6, [-4, 3, -9, 0, 4, 1]];
+
+function plusMinus(arr) {
+  // Write your code here
+  let l = arr[0];
+  let nl = arr[1];
+  let positive = 0;
+  let negative = 0;
+  let zero = 0;
+  for (let i = 0; i < nl.length; i++) {
+    //find ratio of negitive
+    if (Math.sign(nl[i]) === -1) {
+      negative++;
+    }
+    // find ratio of postive
+    if (Math.sign(nl[i]) === 1) {
+      positive++;
+    }
+
+    //find ratio of 0
+    if (Math.sign(nl[i]) === 0) {
+      zero++;
+    }
+  }
+
+  let pos = (positive / l).toFixed(6);
+  let neg = (negative / l).toFixed(6);
+  let ze = (zero / l).toFixed(6);
+
+  return (
+    console.log(Number(pos)), console.log(Number(neg)), console.log(Number(ze))
+  );
+}
+
+plusMinus(arraysss);
