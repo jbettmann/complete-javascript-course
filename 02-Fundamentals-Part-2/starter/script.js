@@ -333,3 +333,20 @@ function plusMinus(arr) {
 }
 
 plusMinus(arraysss);
+
+const jsonSameple = [
+  'task: taskA',
+  'files: lib/foo.txt lib/bar.txt',
+  'deps:',
+  '',
+  'task: taskB',
+  'files: src/baz.txt',
+  'deps:',
+  '',
+  'task: taskC',
+  'files: README.md',
+  'deps:',
+  '',
+];
+
+console.log(JSON.parse(jsonSameple));
