@@ -428,3 +428,117 @@ team1 > team2 && console.log('Team 2 is more likely to win');
 // for (const [key, { open, close }] of entries) {
 //   console.log(`On ${key} we open at ${open} and close at ${close}`);
 //}
+
+// Sets
+const ordersSet = new Set([
+  'pasta',
+  'pizza',
+  'pizza',
+  'pasta',
+  'risotto',
+  'pasta',
+  'pizza',
+]);
+
+console.log(ordersSet);
+console.log(new Set('Jordan'));
+
+console.log(ordersSet.size); // simplar to .length
+console.log(ordersSet.has('Bread')); // similar to includes()
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+
+ordersSet.delete('risotto');
+
+// ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ['waiter', 'Chef', 'waiter', 'Manger', 'Chef', 'waiter'];
+
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+
+//Maps
+
+const restt = new Map();
+
+// set() is simplar to add()
+restt.set('name', 'Classico Intalian'); // first arg is "key" second is "value"
+restt.set(1, 'Italy');
+
+// set() method returns the Map
+console.log(restt.set(2, 'Germany'));
+
+restt
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are close');
+
+// use the get() method to read data from Map. Just pass the name of key in its data type
+console.log(restt.get('name'));
+console.log(restt.get(true));
+
+const time = 8;
+console.log(restt.get(time > restt.get('open') && time < restt.get('close')));
+
+// check if Map has key
+console.log(restt.has('categories'));
+restt.delete(2);
+restt.set([1, 2], 'Test');
+
+console.log(restt);
+// restt.clear();
+console.log(restt.size);
+
+// prints undefined because of JavaScript behind the seines, Heap
+console.log(restt.get([1, 2])); // undefined
+
+// This works
+const arr = [1, 2];
+restt.set(arr, 'Test');
+console.log(restt.get(arr)); // "Test"
+
+// selecte a DOM element
+restt.set(document.querySelector('h1', 'Heading'));
+
+// This is the perfered way of creating a Map
+const question = new Map([
+  ['question', 'what is the best programming language?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try Again'],
+]);
+
+// console.log(question);
+
+// Convert object to map
+const hoursMap = new Map(Object.entries(hours));
+console.log(hoursMap);
+
+// Quiz App
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+// console.log(answer);
+
+// checks if answer === to correct answer in Map, then returns 'true' or 'false'
+console.log(question.get(answer === question.get('correct')));
+
+console.log([...question]);
+console.log('All Keys', [...question.keys()]);
+console.log('All Values', [...question.values()]);
+console.log(console);
