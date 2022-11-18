@@ -293,6 +293,7 @@ const game = {
     team2: 6.5,
   },
 };
+
 console.log('---- Challenge 2-----');
 // 1)
 // Loop over game.scored arry
@@ -359,6 +360,41 @@ printGoals(...game.scored);
 
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
+
+console.log('---- Challenge 3 -----');
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+// 1) create array with no duplicates
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2)remove Yellow card at min 64
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3) Find average amount of time something happened by taking the total time of game divided by the number of events
+const time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+// 4) Loop over events and find if its first half or second
+for (const [min, event] of gameEvents) {
+  const half = min <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[${half} HALF] ${min}: ${event}`);
+}
 
 // console.log('----- for of Loop ------');
 
@@ -430,115 +466,115 @@ team1 > team2 && console.log('Team 2 is more likely to win');
 //}
 
 // Sets
-const ordersSet = new Set([
-  'pasta',
-  'pizza',
-  'pizza',
-  'pasta',
-  'risotto',
-  'pasta',
-  'pizza',
-]);
+// const ordersSet = new Set([
+//   'pasta',
+//   'pizza',
+//   'pizza',
+//   'pasta',
+//   'risotto',
+//   'pasta',
+//   'pizza',
+// ]);
 
-console.log(ordersSet);
-console.log(new Set('Jordan'));
+// console.log(ordersSet);
+// console.log(new Set('Jordan'));
 
-console.log(ordersSet.size); // simplar to .length
-console.log(ordersSet.has('Bread')); // similar to includes()
-ordersSet.add('Garlic Bread');
-ordersSet.add('Garlic Bread');
+// console.log(ordersSet.size); // simplar to .length
+// console.log(ordersSet.has('Bread')); // similar to includes()
+// ordersSet.add('Garlic Bread');
+// ordersSet.add('Garlic Bread');
 
-ordersSet.delete('risotto');
+// ordersSet.delete('risotto');
 
-// ordersSet.clear();
-console.log(ordersSet);
+// // ordersSet.clear();
+// console.log(ordersSet);
 
-for (const order of ordersSet) console.log(order);
+// for (const order of ordersSet) console.log(order);
 
-// Example
-const staff = ['waiter', 'Chef', 'waiter', 'Manger', 'Chef', 'waiter'];
+// // Example
+// const staff = ['waiter', 'Chef', 'waiter', 'Manger', 'Chef', 'waiter'];
 
-const staffUnique = [...new Set(staff)];
-console.log(staffUnique);
+// const staffUnique = [...new Set(staff)];
+// console.log(staffUnique);
 
-//Maps
+// //Maps
 
-const restt = new Map();
+// const restt = new Map();
 
-// set() is simplar to add()
-restt.set('name', 'Classico Intalian'); // first arg is "key" second is "value"
-restt.set(1, 'Italy');
+// // set() is simplar to add()
+// restt.set('name', 'Classico Intalian'); // first arg is "key" second is "value"
+// restt.set(1, 'Italy');
 
-// set() method returns the Map
-console.log(restt.set(2, 'Germany'));
+// // set() method returns the Map
+// console.log(restt.set(2, 'Germany'));
 
-restt
-  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'We are open')
-  .set(false, 'We are close');
+// restt
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   .set(true, 'We are open')
+//   .set(false, 'We are close');
 
-// use the get() method to read data from Map. Just pass the name of key in its data type
-console.log(restt.get('name'));
-console.log(restt.get(true));
+// // use the get() method to read data from Map. Just pass the name of key in its data type
+// console.log(restt.get('name'));
+// console.log(restt.get(true));
 
-const time = 8;
-console.log(restt.get(time > restt.get('open') && time < restt.get('close')));
+// const time = 8;
+// console.log(restt.get(time > restt.get('open') && time < restt.get('close')));
 
-// check if Map has key
-console.log(restt.has('categories'));
-restt.delete(2);
-restt.set([1, 2], 'Test');
+// // check if Map has key
+// console.log(restt.has('categories'));
+// restt.delete(2);
+// restt.set([1, 2], 'Test');
 
-console.log(restt);
-// restt.clear();
-console.log(restt.size);
+// console.log(restt);
+// // restt.clear();
+// console.log(restt.size);
 
-// prints undefined because of JavaScript behind the seines, Heap
-console.log(restt.get([1, 2])); // undefined
+// // prints undefined because of JavaScript behind the seines, Heap
+// console.log(restt.get([1, 2])); // undefined
 
-// This works
-const arr = [1, 2];
-restt.set(arr, 'Test');
-console.log(restt.get(arr)); // "Test"
+// // This works
+// const arr = [1, 2];
+// restt.set(arr, 'Test');
+// console.log(restt.get(arr)); // "Test"
 
-// selecte a DOM element
-restt.set(document.querySelector('h1', 'Heading'));
+// // selecte a DOM element
+// restt.set(document.querySelector('h1', 'Heading'));
 
-// This is the perfered way of creating a Map
-const question = new Map([
-  ['question', 'what is the best programming language?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct 🎉'],
-  [false, 'Try Again'],
-]);
+// // This is the perfered way of creating a Map
+// const question = new Map([
+//   ['question', 'what is the best programming language?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct 🎉'],
+//   [false, 'Try Again'],
+// ]);
 
-// console.log(question);
+// // console.log(question);
 
-// Convert object to map
-const hoursMap = new Map(Object.entries(hours));
-console.log(hoursMap);
+// // Convert object to map
+// const hoursMap = new Map(Object.entries(hours));
+// console.log(hoursMap);
 
-// Quiz App
-console.log(question.get('question'));
-for (const [key, value] of question) {
-  if (typeof key === 'number') {
-    console.log(`Answer ${key}: ${value}`);
-  }
-}
+// // Quiz App
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') {
+//     console.log(`Answer ${key}: ${value}`);
+//   }
+// }
 
-// const answer = Number(prompt('Your answer'));
-const answer = 3;
-// console.log(answer);
+// // const answer = Number(prompt('Your answer'));
+// const answer = 3;
+// // console.log(answer);
 
-// checks if answer === to correct answer in Map, then returns 'true' or 'false'
-console.log(question.get(answer === question.get('correct')));
+// // checks if answer === to correct answer in Map, then returns 'true' or 'false'
+// console.log(question.get(answer === question.get('correct')));
 
-console.log([...question]);
-console.log('All Keys', [...question.keys()]);
-console.log('All Values', [...question.values()]);
-console.log(console);
+// console.log([...question]);
+// console.log('All Keys', [...question.keys()]);
+// console.log('All Values', [...question.values()]);
+// console.log(console);
