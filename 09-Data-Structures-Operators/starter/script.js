@@ -578,3 +578,165 @@ for (const [min, event] of gameEvents) {
 // console.log('All Keys', [...question.keys()]);
 // console.log('All Values', [...question.values()]);
 // console.log(console);
+
+// Strings
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(airline.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('portugal'));
+
+console.log(airline.slice(4));
+
+// start argument is included in sub string AND last argument IS NOT included
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You go the middle seat');
+  else console.log('Lucky Duck');
+};
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('Jordan'));
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+const passenger = 'jOrdAn'; // Jordan
+
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+//Comparing email
+
+const email = 'hello@jordan.io';
+const loginEmail = '  Hello@Jordan.Io \n';
+
+const lowerEamil = loginEmail.toLowerCase();
+
+// ES6 introduced trimStart and trimEnd
+const trimmedEmail = lowerEamil.trim(); // trim() elimniates the extra space
+console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+// replace(whatToReplace, whatToReplaceWith)
+const priceGB = '28,897E';
+const priceUS = priceGB.replace('E', '$').replace(',', '.');
+console.log(priceUS);
+
+const annuncement = 'All passengers come to brding door 23. Boarding door 23';
+
+//
+console.log(annuncement.replaceAll('door', 'gate'));
+
+// replace with regular expression
+console.log(annuncement.replace(/door/g, 'gate'));
+
+//Booleans
+
+const planes = 'Airbus A32neo';
+
+console.log(planes.includes('A320'));
+console.log(planes.includes('Boeing'));
+console.log(planes.startsWith('Air'));
+
+if (planes.startsWith('Airbus') && planes.endsWith('neo')) {
+  console.log('It Is');
+}
+
+//Practice exercise
+const checkBaggage = function (items) {
+  // always convert to lowercase
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You cannot get on');
+  } else {
+    console.log('you are all good!');
+  }
+};
+checkBaggage('I have a laptop, some food and pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('I have a gun');
+
+// splits at the ' ' & join();
+console.log('a+very+nice+string'.split('+'));
+
+const [firstName, lastName] = 'Jordan Bettmann'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitlizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+capitlizeName('jessica ann smith davis');
+
+// Padding // padStart(lengthForString, characterToPadWith)
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+'));
+console.log('jordan'.padEnd(25, '+'));
+console.log(message.padStart(25, '+').padEnd(30, '+'));
+
+const maskCrditCard = function (number) {
+  const str = number + ''; // makes number a string
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCrditCard(4337675885759857));
+console.log(maskCrditCard('433767588575985734562345'));
+
+// Repeat
+const message3 = 'Bad weather... All Departures delayed...';
+console.log(message3.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩️'.repeat(n)}`);
+};
+
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+
+// const data = [
+//   {
+//     data: 'now',
+//     name: 'Jordan',
+//     saying: 'likes cool things',
+//   },
+// ];
+// const [{ ...newData }] = data;
+// // const newPhrase = data.map(d => d.split(','));
+// console.log(newData);
+// const newDataValues = Object.values(newData);
+// console.log(newDataValues);
+// console.log(newDataValues.join(' '));
+
+const newThing = 'jessica ann smith davis'; // returns array of strings ie. ['jessica', 'ann', 'smith', 'davis']
+console.log(newThing.split(' '));
