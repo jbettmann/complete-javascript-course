@@ -74,3 +74,27 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+const array1 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// SLICE
+console.log(array1.slice(2));
+console.log(array1.slice(2, 4));
+console.log(array1.slice(-2));
+
+//SPLICE (start, numberOfElementsToRemove) Mutates array
+console.log(array1.splice(2));
+array1.splice(-1);
+array1.splice(1, 2);
+
+console.log(array1);
+
+// REVERSE Mutates OG array
+const array2 = ['j', 'r', 't', 'm'];
+console.log(array2.reverse());
+
+// CONCAT
+const letters = array1.concat(array2);
+
+// JOIN
+console.log(letters.join(' - '));
