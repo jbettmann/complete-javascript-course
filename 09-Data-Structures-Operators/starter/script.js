@@ -740,3 +740,28 @@ planesInLine(12);
 
 const newThing = 'jessica ann smith davis'; // returns array of strings ie. ['jessica', 'ann', 'smith', 'davis']
 console.log(newThing.split(' '));
+
+console.log('---- Challenge 4 -----');
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+document.querySelector('button').addEventListener('click', convert);
+
+const practice =
+  'underscore_case first_name Some_Variable calculate_AGE delayed_departure';
+
+function convert() {
+  const names = document.querySelector('textarea').value;
+  let variableNames = names.split('\n');
+
+  for (const [i, name] of variableNames.entries()) {
+    const [first, second] = name.toLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+
+    console.log(`${output.padEnd(20, ' ')}${'✅'.repeat(i + 1)}`);
+  }
+}
