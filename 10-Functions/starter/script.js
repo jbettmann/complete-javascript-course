@@ -167,3 +167,56 @@ const poll = {
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// Closures
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(passengerCount);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g();
+// f() now has access to a variable
+f();
+
+console.dir(f);
+
+const boardPassengers = function (n, wait) {
+  const preGroup = n / 3;
+
+  setTimeout(() => {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`We are now boarding all ${perGroup} passengers`);
+  }, wait * 1000);
+  console.log(`Will Start boarding in ${wait}`);
+};
+
+boardPassengers(180, 3);
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document
+    .querySelector('body')
+    .addEventListener('click', () => (header.style.color = 'blue'));
+})();
