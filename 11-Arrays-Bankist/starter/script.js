@@ -61,15 +61,31 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// ************* MY CODE ********************
+
+const displayMovements = function (movements) {
+  // clears out html
+  containerMovements.innerHTML = '';
+  movements.forEach((mov, i) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}</div>
+      </div>
+    `;
+    // accepts two stings (positionAttachHTML, stringOfHTML)
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+// console.log(containerMovements.innerHTML);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -79,22 +95,103 @@ const array1 = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // SLICE
 console.log(array1.slice(2));
+// end perimeter is not included
 console.log(array1.slice(2, 4));
 console.log(array1.slice(-2));
+console.log(array1.slice());
 
 //SPLICE (start, numberOfElementsToRemove) Mutates array
-console.log(array1.splice(2));
-array1.splice(-1);
-array1.splice(1, 2);
+// console.log(array1.splice(2));
+// array1.splice(-1);
+// array1.splice(1, 2);
 
 console.log(array1);
 
 // REVERSE Mutates OG array
 const array2 = ['j', 'r', 't', 'm'];
-console.log(array2.reverse());
+// console.log(array2.reverse());
 
 // CONCAT
 const letters = array1.concat(array2);
+console.log([...array1, ...array2]);
 
 // JOIN
 console.log(letters.join(' - '));
+
+// AT Method (Also works on Strings)
+const arry = [23, 11, 64];
+console.log(arry[0]);
+console.log(arry.at(0));
+
+// getting last array element
+console.log(arry.length - 1);
+console.log(arry.slice(-1)[0]);
+console.log(arry.at(-1));
+
+console.log('jordan'.at(3));
+
+// for (const movement of movements {
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`${i + 1} You deposited ${movement}`);
+  } else {
+    console.log(`${i + 1} You withdrew ${Math.abs(movement)}`); // Math.ads() removes sign
+  }
+}
+console.log('---- forEach() ----');
+movements.forEach((move, i, arr) =>
+  move > 0
+    ? console.log(`${i + 1} You deposited ${move}`)
+    : console.log(`${i + 1} You withdrew ${Math.abs(move)}`)
+);
+
+// forEach on Maps and Sets
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key, map) => {
+  console.log(`${key}: ${value}`);
+});
+
+// SET
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'ERU', 'EUR']);
+
+console.log(currenciesUnique);
+currenciesUnique.forEach((value, _, map) => {
+  console.log(`${_}: ${value}`);
+});
+
+const Julia = [3, 5, 2, 12, 7];
+const Kate = [4, 1, 15, 8, 3];
+const Julia2 = [9, 16, 6, 8, 3];
+const Kate2 = [10, 5, 6, 1, 4];
+
+const checkDogs = (juilesArr, katesArray) => {
+  const julNewArray = juilesArr.slice(1, -2);
+  const bothArray = julNewArray.concat(katesArray);
+  bothArray.forEach((dog, i) => {
+    if (dog < 3) {
+      console.log(`Dog number ${i + 1} is still a puppy at ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is an adult at ${dog} years old`);
+    }
+  });
+};
+
+checkDogs(Julia, Kate);
+console.log('---- Data 2 -----');
+checkDogs(Julia2, Kate2);
+
+const eurToUsd = 1.1;
+const movementUSD = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementUSD);
+
+const moveDescrp = movements.map(
+  (mov, i) => `${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
+);
+console.log(moveDescrp);
