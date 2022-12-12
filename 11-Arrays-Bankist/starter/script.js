@@ -73,15 +73,121 @@ const displayMovements = function (movements) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}</div>
+        <div class="movements__value">${mov}€</div>
       </div>
     `;
     // accepts two stings (positionAttachHTML, stringOfHTML)
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+
+const calcPrintBalance = acc => {
+  acc.balance = acc.movements.reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+  labelBalance.textContent = `${acc.balance}€`;
+};
+
 // console.log(containerMovements.innerHTML);
+
+const createUsernames = arrAccounts => {
+  arrAccounts.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+
+const calcDisplaySummary = acc => {
+  const incomes = acc.movements
+    .filter(amount => amount > 0)
+    .reduce((acc, cur) => acc + cur);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = acc.movements
+    .filter(amount => amount < 0)
+    .reduce((acc, cur) => acc + cur);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = acc.movements
+    .filter(amount => amount > 0)
+    .map(dep => (dep * acc.interestRate) / 100)
+    .filter(int => int >= 1)
+    .reduce((acc, cur) => acc + cur);
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+const updateUI = acc => {
+  // display and calcluate movements
+  displayMovements(acc.movements);
+  /// display balance
+  calcPrintBalance(acc);
+
+  // display summary
+  calcDisplaySummary(acc);
+};
+
+// event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', e => {
+  // prevent form from sumbitting
+  e.preventDefault(e);
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  // optional chaining to check if currentAccount exists
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // display ui and welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    // clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+
+  console.log(currentAccount);
+});
+
+// Transfer money between users
+
+btnTransfer.addEventListener('click', e => {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  // clear out input fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+  inputTransferTo.blur();
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // Doing transfer
+    receiverAcc.movements.push(amount);
+    currentAccount.movements.push(-amount);
+    updateUI(currentAccount);
+
+    console.log('Move SUccess ');
+  }
+  console.log(amount, receiverAcc);
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -186,6 +292,38 @@ checkDogs(Julia, Kate);
 console.log('---- Data 2 -----');
 checkDogs(Julia2, Kate2);
 
+console.log('--- Challenge 2 ---');
+
+const calcAverageHumanAge = arry => {
+  const humanAge = arry.map(dog => (dog <= 2 ? dog * 2 : dog * 4 + 16));
+  console.log(humanAge);
+
+  const adultDogs = humanAge.filter(dog => dog >= 18);
+  console.log(adultDogs);
+
+  let aveAdultAge =
+    adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
+
+  console.log(aveAdultAge);
+};
+
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log('--- Challenge 3 Chaining---');
+const calcAverageHumanAgeChain = arry => {
+  const aveAdultAge = arry
+    .map(dog => (dog <= 2 ? dog * 2 : dog * 4 + 16))
+    .filter(dog => dog >= 18)
+    .reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+
+  console.log(aveAdultAge);
+};
+
+calcAverageHumanAgeChain([5, 2, 4, 1, 15, 8, 3]);
+calcAverageHumanAgeChain([16, 6, 10, 5, 6, 1, 4]);
+
+// MAP
 const eurToUsd = 1.1;
 const movementUSD = movements.map(mov => mov * eurToUsd);
 console.log(movements);
@@ -195,3 +333,45 @@ const moveDescrp = movements.map(
   (mov, i) => `${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
 );
 console.log(moveDescrp);
+
+// FILTER
+const deposits = movements.filter(mov => {
+  return mov > 0;
+});
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => {
+  return mov < 0;
+});
+console.log(withdrawals);
+
+// REDUCE
+// acc -> SNOWBALL
+const balance = movements.reduce((acc, cur) => {
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+// Maximum value
+const max = movements.reduce(
+  (acc, cur) => (acc > cur ? acc : cur),
+  movements[0]
+);
+
+console.log(max);
+
+// Chaining Methods PIPELINE
+const totalDepoUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr); // ability to debug within chaining
+    return mov * eurToUsd;
+  })
+  .reduce((acc, cur) => acc + cur);
+
+console.log(totalDepoUSD);
+
+// FIND. Returns first element that satisfies the condition
+const firstWithDrawl = movements.find(mov => mov < 0);
+
+console.log(firstWithDrawl);
