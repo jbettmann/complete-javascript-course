@@ -86,6 +86,26 @@ console.log(h1.parentElement.children);
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
 
+// Menu fade animation and event arguments *************************
+
+// handler function that uses 'this' and bind method
+const handleHover = function (e) {
+  console.log(this);
+  if (e.target.classList.contains('nav__link')) {
+    const linked = e.target;
+    const siblings = linked.closest('.nav').querySelectorAll('.nav__link');
+    const logo = linked.closest('.nav').querySelector('img');
+
+    siblings.forEach(sib => {
+      if (sib !== linked) sib.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+// Passing 'argument' into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
 // ******************************** PROJECT *******************************************
 
 // ******************************** LECTURE *******************************************
@@ -247,13 +267,13 @@ console.log(logo.dataset.versionNumber);
 // logo.className = 'jordan';
 
 // mouseenter event. Similar to hover in CSS
-const alertH1 = () => {
-  alert('addEventListner; Great! You did it');
+// const alertH1 = () => {
+//   alert('addEventListner; Great! You did it');
 
-  setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 5000);
-};
+//   setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 5000);
+// };
 
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
 // old school way of eventListener
 // h1.onmouseenter = () => {
