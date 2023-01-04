@@ -10,6 +10,7 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
+const sections = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
 
 const nav = document.querySelector('.nav');
@@ -137,7 +138,9 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
 
-//Sticky Nav ***********************************************************
+//Intersection Observer API ***************************************
+
+// Sticky Nav
 
 // Sticky Nav w/ Scroll BAD PRACTICE
 // get coords of section 1
@@ -152,8 +155,6 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //   }
 // });
 
-// Sticky Nav w/ Intersection Observer API
-
 // parms callback, options object
 // const observer = new IntersectionObserver(obsCallback, obsOptions);
 const navHeight = nav.getBoundingClientRect().height;
@@ -161,7 +162,6 @@ console.log(navHeight);
 
 const stickNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
 
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
@@ -185,6 +185,55 @@ headerObserver.observe(header);
 // };
 
 // observer.observe(section1);
+
+// Reveal Sections
+
+const sectionReveal = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry, observer);
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+
+  observer.unobserve(entry.target); // stops observation of section. No more events
+};
+
+const sectionObserver = new IntersectionObserver(sectionReveal, {
+  root: null,
+  threshold: 0.1,
+});
+
+sections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
+// Lazy Image Loading
+
+const imgTarget = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', () => {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTarget.forEach(img => imgObserver.observe(img));
 
 // ******************************** PROJECT *******************************************
 
