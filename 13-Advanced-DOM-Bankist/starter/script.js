@@ -187,7 +187,6 @@ headerObserver.observe(header);
 // observer.observe(section1);
 
 // Reveal Sections
-
 const sectionReveal = function (entries, observer) {
   const [entry] = entries;
   // console.log(entry, observer);
@@ -209,7 +208,6 @@ sections.forEach(section => {
 });
 
 // Lazy Image Loading
-
 const imgTarget = document.querySelectorAll('img[data-src]');
 
 const loadImg = function (entries, observer) {
@@ -217,13 +215,14 @@ const loadImg = function (entries, observer) {
   console.log(entry);
 
   if (!entry.isIntersecting) return;
-
   // Replace src with data-src
-  entry.target.src = entry.target.dataset.src;
+  else {
+    entry.target.src = entry.target.dataset.src;
 
-  entry.target.addEventListener('load', () => {
-    entry.target.classList.remove('lazy-img');
-  });
+    entry.target.addEventListener('load', () => {
+      entry.target.classList.remove('lazy-img');
+    });
+  }
 
   observer.unobserve(entry.target);
 };
