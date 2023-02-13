@@ -121,7 +121,6 @@ tabsContainer.addEventListener('click', function (e) {
 
 // handler function that uses 'this' and bind method
 const handleHover = function (e) {
-  console.log(this);
   if (e.target.classList.contains('nav__link')) {
     const linked = e.target;
     const siblings = linked.closest('.nav').querySelectorAll('.nav__link');
@@ -490,3 +489,17 @@ console.log(logo.dataset.versionNumber);
 // h1.onmouseenter = () => {
 //   alert('addEventListner; Great! You did it');
 // };
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('Html parsed and Dome tree built!', e);
+});
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded!!!', e);
+});
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
